@@ -1,3 +1,10 @@
+import PingForm from './components/PingForm';
+
 export default function App() {
-  return <h1>Device Monitor</h1>;
+  return (
+    <main>
+      <h1>Device Monitor</h1>
+      <PingForm />
+    </main>
+  );
 }
