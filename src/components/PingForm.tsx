@@ -8,6 +8,9 @@ type Status =
   | { type: 'success' }
   | { type: 'error'; message: string };
 
+const inputClass =
+  'rounded border border-gray-300 px-3 py-2 aria-invalid:border-red-500 disabled:bg-gray-100';
+
 export default function PingForm() {
   const [uuid, setUuid] = useState('');
   const [batteryPercent, setBatteryPercent] = useState('');
@@ -39,33 +42,45 @@ export default function PingForm() {
 
   return (
     <form onSubmit={handleSubmit} noValidate>
-      <div>
-        <label htmlFor="uuid">uuid</label>
+      <div className="mb-4 flex flex-col gap-1">
+        <label htmlFor="uuid" className="text-sm font-medium text-gray-700">
+          uuid
+        </label>
         <input
           id="uuid"
           type="text"
+          className={inputClass}
           value={uuid}
           onChange={(e) => setUuid(e.target.value)}
           aria-invalid={Boolean(errors.uuid)}
           disabled={loading}
         />
-        {errors.uuid && <span>{errors.uuid}</span>}
+        {errors.uuid && <span className="text-sm text-red-600">{errors.uuid}</span>}
       </div>
 
-      <div>
-        <label htmlFor="battery_percent">battery_percent</label>
+      <div className="mb-4 flex flex-col gap-1">
+        <label htmlFor="battery_percent" className="text-sm font-medium text-gray-700">
+          battery_percent
+        </label>
         <input
           id="battery_percent"
           type="number"
+          className={inputClass}
           value={batteryPercent}
           onChange={(e) => setBatteryPercent(e.target.value)}
           aria-invalid={Boolean(errors.batteryPercent)}
           disabled={loading}
         />
-        {errors.batteryPercent && <span>{errors.batteryPercent}</span>}
+        {errors.batteryPercent && (
+          <span className="text-sm text-red-600">{errors.batteryPercent}</span>
+        )}
       </div>
 
-      <button type="submit" disabled={loading}>
+      <button
+        type="submit"
+        disabled={loading}
+        className="w-full rounded bg-blue-600 py-2 font-medium text-white hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-60"
+      >
         {loading ? 'Sending...' : 'Send'}
       </button>
 
