@@ -1,6 +1,7 @@
 import { FormEvent, useState } from 'react';
 import { sendPing } from '../api/ping';
 import { FormErrors, validate } from '../validation';
+import Message from './Message';
 
 type Status =
   | { type: 'idle' }
@@ -68,8 +69,8 @@ export default function PingForm() {
         {loading ? 'Sending...' : 'Send'}
       </button>
 
-      {status.type === 'success' && <p role="status">Data sent successfully</p>}
-      {status.type === 'error' && <p role="alert">{status.message}</p>}
+      {status.type === 'success' && <Message type="success">Data sent successfully</Message>}
+      {status.type === 'error' && <Message type="error">{status.message}</Message>}
     </form>
   );
 }
