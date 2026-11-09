@@ -44,11 +44,12 @@ export default function PingForm() {
     <form onSubmit={handleSubmit} noValidate>
       <div className="mb-4 flex flex-col gap-1">
         <label htmlFor="uuid" className="text-sm font-medium text-gray-700">
-          uuid
+          UUID zariadenia
         </label>
         <input
           id="uuid"
           type="text"
+          placeholder="napr. 550e8400-e29b-41d4-a716-446655440000"
           className={inputClass}
           value={uuid}
           onChange={(e) => setUuid(e.target.value)}
@@ -60,11 +61,12 @@ export default function PingForm() {
 
       <div className="mb-4 flex flex-col gap-1">
         <label htmlFor="battery_percent" className="text-sm font-medium text-gray-700">
-          battery_percent
+          Úroveň batérie (%)
         </label>
         <input
           id="battery_percent"
           type="number"
+          placeholder="0 – 100"
           className={inputClass}
           value={batteryPercent}
           onChange={(e) => setBatteryPercent(e.target.value)}
@@ -81,10 +83,10 @@ export default function PingForm() {
         disabled={loading}
         className="w-full rounded bg-blue-600 py-2 font-medium text-white hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-60"
       >
-        {loading ? 'Sending...' : 'Send'}
+        {loading ? 'Odosielam...' : 'Odoslať'}
       </button>
 
-      {status.type === 'success' && <Message type="success">Data sent successfully</Message>}
+      {status.type === 'success' && <Message type="success">Údaje boli úspešne odoslané</Message>}
       {status.type === 'error' && <Message type="error">{status.message}</Message>}
     </form>
   );

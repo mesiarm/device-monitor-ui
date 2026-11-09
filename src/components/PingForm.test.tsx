@@ -8,9 +8,9 @@ afterEach(() => vi.restoreAllMocks());
 
 async function fill(uuid: string, battery: string) {
   const user = userEvent.setup();
-  if (uuid) await user.type(screen.getByLabelText('uuid'), uuid);
-  if (battery) await user.type(screen.getByLabelText('battery_percent'), battery);
-  await user.click(screen.getByRole('button', { name: 'Send' }));
+  if (uuid) await user.type(screen.getByLabelText('UUID zariadenia'), uuid);
+  if (battery) await user.type(screen.getByLabelText('Úroveň batérie (%)'), battery);
+  await user.click(screen.getByRole('button', { name: 'Odoslať' }));
 }
 
 describe('PingForm', () => {
@@ -31,7 +31,7 @@ describe('PingForm', () => {
     render(<PingForm />);
     await fill(UUID, '85');
 
-    expect(await screen.findByText('Data sent successfully')).toBeInTheDocument();
+    expect(await screen.findByText('Údaje boli úspešne odoslané')).toBeInTheDocument();
     expect(fetchMock).toHaveBeenCalledWith(
       `/api/devices/${UUID}/ping`,
       expect.objectContaining({ method: 'POST', body: JSON.stringify({ battery_percent: 85 }) }),

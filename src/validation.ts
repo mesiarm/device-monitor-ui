@@ -13,12 +13,12 @@ export function validate({ uuid, batteryPercent }: FormValues): FormErrors {
   }
 
   if (batteryPercent.trim() === '') {
-    errors.batteryPercent = 'Batéria je povinná.';
+    errors.batteryPercent = 'Úroveň batérie je povinná.';
   } else {
     const value = Number(batteryPercent);
     // API prijíma len celé čísla (strict integer) od 0 do 100.
     if (!Number.isInteger(value) || value < 0 || value > 100) {
-      errors.batteryPercent = 'Batéria musí byť celé číslo od 0 do 100.';
+      errors.batteryPercent = 'Úroveň batérie musí byť celé číslo od 0 do 100.';
     }
   }
 
